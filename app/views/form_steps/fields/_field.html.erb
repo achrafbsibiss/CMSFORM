@@ -1,0 +1,18 @@
+
+<div id="<%#= dom_id field %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Form step:</strong>
+    <%#= field.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= field.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Type:</strong>
+    <%= render_form_field(field) %>
+  </p>
+
+</div>
