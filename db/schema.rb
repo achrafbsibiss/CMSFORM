@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_11_122844) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_11_194646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fields", force: :cascade do |t|
+    t.bigint "form_step_id", null: false
+    t.string "name"
+    t.string "input_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_step_id"], name: "index_fields_on_form_step_id"
+  end
 
   create_table "form_steps", force: :cascade do |t|
     t.bigint "template_id", null: false
@@ -23,21 +32,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_122844) do
     t.index ["template_id"], name: "index_form_steps_on_template_id"
   end
 
-  create_table "form_steps_fields", force: :cascade do |t|
-    t.bigint "form_step_id", null: false
-    t.string "name"
-    t.integer "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["form_step_id"], name: "index_form_steps_fields_on_form_step_id"
-  end
-
   create_table "templates", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "fields", "form_steps"
   add_foreign_key "form_steps", "templates"
-  add_foreign_key "form_steps_fields", "form_steps"
 end

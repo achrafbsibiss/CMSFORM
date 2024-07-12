@@ -3,19 +3,17 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <% content_for :title, "Fields" %>
+  
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Fields</h1>
-    <%= link_to "New field", new_form_steps_field_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <h1 class="font-bold text-4xl">all the field</h1>
+    <%= link_to "New form step", new_template_form_step_field_path(@template, @form_step), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="form_steps_fields" class="min-w-full">
-    <% @form_steps_fields.each do |form_steps_field| %>
-      <%= render form_steps_field %>
-      <p>
-        <%= link_to "Show this field", form_steps_field, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
+  <div id="form_steps" class="min-w-full">
+    <% @fields.each do |fields|%>
+        <% fields = fields.is_a?(Field) ? [fields] : fields %>
+        <%= render partial: "field", locals:{field: fields}  %>
     <% end %>
   </div>
 </div>
